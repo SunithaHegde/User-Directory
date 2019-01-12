@@ -1,0 +1,68 @@
+body {
+    height: 95vh;
+}
+#userContainer {
+	width: 100%;
+	border:2px solid #f3f3f3;
+	height:100%;
+
+}	
+#topBar	{
+	width: 100%;
+	height: 15%;
+	border-bottom: 2px solid #f3f3f3;
+
+}	
+#contactContainer {
+	width: 100%;
+	height: 85%;
+}	
+#contactList {
+	width: 20%;	
+	border-right:2px solid #f3f3f3;
+	height:100%;
+	overflow-y:scroll;
+}	
+#contactDetails {
+	width: 70%;
+}	
+
+.layout-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.layout-align-space-between {
+	justify-content: space-between;
+}
+
+#searchBar {
+	width:20%;
+}
+contact-details{
+	width:100%;
+	height:100%;
+}	
+#contactDetailsContainer {
+	height:100%;
+	width:70%;
+	margin-left:2%;
+}	
+.myDetails{
+	float:right;	
+	display:flex;
+	width:30%;
+}	
+img{
+	height:90%;
+	width:20%;
+}	
+#myName {
+	width:75%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	padding-top: 10%;
+	padding-right:1%;
+	text-align:right;
+}	

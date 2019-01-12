@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+		<title>Profiles</title>
+		<link rel="stylesheet" href="./userDirectoryVlocity.css"/>
+		<script src="./userDirectoryVlocity.js"></script>
+	</head>
+	<body>
+		
+		<div id="userContainer">
+			<div id="topBar" class="layout-row layout-align-space-between">
+				<div id="searchBar"></div>
+				<div class="myDetails">
+					<span id="myName">User Name</span>
+					<img src="./myFace.png"/>
+				</div>
+			</div>
+			<div id="contactContainer" class="layout-row">
+				<div id="contactList">
+				
+				</div>
+				<div id="contactDetailsContainer"></div>
+			</div>
+		</div>
+		<template id="contactDetailTemplate">
+			<style>
+				.userDetailContainer {
+					display: flex;
+					flex-direction: column;
+				}
+				.row {
+					display: flex;
+					flex-direction: row;
+					margin-top:5%;
+				}
+				#profilePic{
+					max-width:100%;
+					height:auto;
+				}
+				.colum1 {
+					height: 30%;
+					align-self:flex-end;
+					margin-top:10%;
+				}
+				.button{
+					line-height: 3;
+					border: 1px solid black;
+					background-color: #e0e4ea;
+					height: 25%;
+					text-align: center;
+					border-radius: 25px;
+					margin-top:50%;
+					cursor:pointer;
+					text-overflow: ellipsis;
+					width: 100%;
+					overflow: hidden;
+					white-space: nowrap;
+				}
+				.colum {
+					display: flex;
+					flex-direction: column;
+					margin-left:5%;
+				}
+				table {
+					width: 100%;
+					border:1px solid black;
+					border-collapse: collapse;
+					margin-top: 5%;
+
+				}
+				tr:nth-child(odd){
+					background: #e0e4ea;
+				}
+			</style>
+			<div class="colum">
+				<div class="row">
+					<div id="imageContainer"><img id="profilePic"/></div>
+					<div class="colum"><div class="button">Send Message!</div><div class="colum1" id="ratings"></div></div>
+				</div>
+				<div class="row" id="contactDescription"></div>
+				<div><table id="contactTable"></table></div>
+			</div>
+		</template>
+	</body>
+</html>
