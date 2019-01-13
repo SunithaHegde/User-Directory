@@ -1,19 +1,19 @@
 body {
     height: 95vh;
 }
-#userContainer {
+.userContainer {
 	width: 100%;
 	border:2px solid #f3f3f3;
 	height:100%;
 
 }	
-#topBar	{
+.header	{
 	width: 100%;
 	height: 15%;
 	border-bottom: 2px solid #f3f3f3;
 
 }	
-#contactContainer {
+.contactContainer {
 	width: 100%;
 	height: 85%;
 }	
@@ -21,7 +21,7 @@ body {
 	width: 20%;	
 	border-right:2px solid #f3f3f3;
 	height:100%;
-	overflow-y:scroll;
+	overflow-y:auto;
 }	
 #contactDetails {
 	width: 70%;
@@ -57,7 +57,7 @@ img{
 	height:90%;
 	width:20%;
 }	
-#myName {
+.userName {
 	width:75%;
 	white-space:nowrap;
 	overflow:hidden;
