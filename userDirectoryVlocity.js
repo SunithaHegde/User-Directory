@@ -6,17 +6,19 @@ class userDirectoryApp {
 			this.getUserList().then((value) => {
 				this.userList = value["People"];
 				this.createUserComponent(this.userList);
-				let searchComponent = document.createElement('search-component');
-				searchComponent.setUserList(value["People"]);
-				this.searchComponent = searchComponent;
-				this.searchComponent.addEventListener("keyup",{
-					handleEvent:this.searchHandler,
-					taskScope:this
-				});
-				document.getElementById("searchBar").appendChild(this.searchComponent);
+				this.createSearchComponent();
 				document.getElementById("contactList").addEventListener('scroll', {handleEvent:this.onScrollHandler,taskScope:this});
 			});	
 		}
+		createSearchComponent(){
+			this.searchComponent = document.createElement('search-component');;
+			this.searchComponent.setUserList(this.userList);
+			this.searchComponent.addEventListener("keyup",{
+				handleEvent:this.searchHandler,
+				taskScope:this
+			});
+			document.getElementById("searchBar").appendChild(this.searchComponent);
+		}	
 		getUserList() {
 			return new Promise((resolve,reject) => {
 					const HTTP = new XMLHttpRequest();
@@ -73,33 +75,7 @@ customElements.define('contact-item',
     constructor() {
       super();
 	  this.userDetails = "";
-		let contact = `<style>
-				.contactName {
-					padding: 16px;
-					border-bottom: solid 2px #f3f3f3;
-					transition: all 0.6s ease;
-					height:30px;
-				}
-
-				.contactName:hover {
-					background: #c3ccdd;
-					border-radius: 20px;
-				}
-				.right{
-					border: solid black;
-					border-width: 0 3px 3px 0;
-					display: inline-block;
-					padding: 3px;
-					display:none;
-					transform: rotate(-45deg);
-					-webkit-transform: rotate(-45deg);
-				}	
-				.active {
-						background: #e0e4ea;
-				}	
-				</style>
-				<div class="contactName"><i class="right"></i></div>
-				`
+		let contact = this.getContactTemplate();
 		let shadow = this.attachShadow({mode: 'open'});
 		shadow.innerHTML = contact;
 		this.contactComponent = this.shadowRoot.querySelector('.contactName');
@@ -122,6 +98,35 @@ customElements.define('contact-item',
 		clickedElement = this.taskScope.contactComponent;
 		this.taskScope.contactComponent.classList.add("active");
 	}
+	getContactTemplate(){
+		return `<style>
+			.contactName {
+				padding: 16px;
+				border-bottom: solid 2px #f3f3f3;
+				transition: all 0.6s ease;
+				height:30px;
+			}
+
+			.contactName:hover {
+				background: #c3ccdd;
+				border-radius: 20px;
+			}
+			.right{
+				border: solid black;
+				border-width: 0 3px 3px 0;
+				display: inline-block;
+				padding: 3px;
+				display:none;
+				transform: rotate(-45deg);
+				-webkit-transform: rotate(-45deg);
+			}	
+			.active {
+					background: #e0e4ea;
+			}	
+			</style>
+			<div class="contactName"><i class="right"></i></div>
+			`
+	}	
 });
 customElements.define('contact-details',
 	class extends HTMLElement {
@@ -177,7 +182,23 @@ customElements.define('search-component',
 		constructor() {
 			super();
 			this.userList =[];
-			let search = `<style>
+			let search = this.getSearchComponent();
+			let shadow = this.attachShadow({mode: 'open'});
+			shadow.innerHTML = search;
+			this.searchComponent = this.shadowRoot.querySelector('#search');
+			this.searchComponent.addEventListener("keyup",{
+				handleEvent:this.searchHandler,
+				taskScope:this
+			});
+			this.searchComponent.addEventListener("blur",(e) =>{
+				let autoContainer = this.shadowRoot.querySelector("#autoSearchContainer");
+				if( autoContainer && autoContainer.querySelectorAll( ":hover" ).length == 0){
+					autoContainer.style.display = "none";
+				}	
+			});
+		}
+		getSearchComponent(){
+			return `<style>
 			.search {
 				border: 1px solid #c3ccdd;
 				border-radius: 5px;
@@ -219,20 +240,7 @@ customElements.define('search-component',
 			}	
 			</style>
 			<input class="search" id="search" type="search" placeholder="Search">`;
-			let shadow = this.attachShadow({mode: 'open'});
-			shadow.innerHTML = search;
-			this.searchComponent = this.shadowRoot.querySelector('#search');
-			this.searchComponent.addEventListener("keyup",{
-				handleEvent:this.searchHandler,
-				taskScope:this
-			});
-			this.searchComponent.addEventListener("blur",(e) =>{
-				let autoContainer = this.shadowRoot.querySelector("#autoSearchContainer");
-				if( autoContainer && autoContainer.querySelectorAll( ":hover" ).length == 0){
-					autoContainer.style.display = "none";
-				}	
-			});
-		}
+		}	
 		setUserList(list){
 			this.userList = list;	
 		}	

@@ -1,4 +1,4 @@
-body {
+.container {
     height: 95vh;
 }
 .userContainer {
@@ -53,7 +53,7 @@ contact-details{
 	display:flex;
 	width:30%;
 }	
-img{
+.img{
 	height:90%;
 	width:20%;
 }	
